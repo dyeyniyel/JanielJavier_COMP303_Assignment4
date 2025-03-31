@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Place Order</title>
+    <style>
+        /* Basic styling for font and centering the form */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .order-container {
+            width: 400px;
+            margin: 20px auto; /* Centers the form horizontally */
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        /* Style the table to align labels and input fields */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 8px;
+            vertical-align: middle;
+        }
+        /* Center the submit button and add top margin */
+        .submit-btn {
+            text-align: center;
+            padding-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center;">Place Order</h1>
+    <div class="order-container">
+        <!-- Display error message if present -->
+        <div th:if="${error}">
+            <p style="color: red;" th:text="${error}"></p>
+        </div>
+        <form th:action="@{/order/place}" th:object="${order}" method="post">
+            <table>
+                <!-- Row for Account Number -->
+                <tr>
+                    <td><label for="accountNumber">Account Number:</label></td>
+                    <td><input type="text" id="accountNumber" th:field="*{accountNumber}" /></td>
+                </tr>
+                <!-- Row for Stock Symbol -->
+                <tr>
+                    <td><label for="stockSymbol">Stock Symbol:</label></td>
+                    <td><input type="text" id="stockSymbol" th:field="*{stockSymbol}" /></td>
+                </tr>
+                <!-- Row for Quantity -->
+                <tr>
+                    <td><label for="quantity">Quantity to Reserve:</label></td>
+                    <td><input type="number" id="quantity" th:field="*{quantity}" /></td>
+                </tr>
+                <!-- Row for the submit button -->
+                <tr>
+                    <td colspan="2" class="submit-btn">
+                        <button type="submit">Place Order</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>
