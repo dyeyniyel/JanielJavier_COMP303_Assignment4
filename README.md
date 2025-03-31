@@ -6,22 +6,7 @@ This project implements a microservices-based architecture using Spring Boot. It
 
 ## 🔧 Microservices Overview
 
-### 1. Account Transactions Service
-- **Purpose**: Manages account data and stock quantities.
-- **Key Operations**:
-  - **Create Account**: Allows the creation of a new account with an initial stock quantity and price.
-  - **Reserve Stock**: Deducts (reserves) the requested quantity from the available stock when an order is placed.
-
----
-
-### 2. Fee Service
-- **Purpose**: Calculates transaction fees based on order details.
-- **Key Operation**:
-  - **Calculate Fee**: Computes a fee using a fixed percentage (e.g., 10%) from the order’s price and quantity.
-
----
-
-### 3. Order Service
+### 1. Order Service (Eureka Service 1)
 - **Purpose**: Acts as the orchestrator by handling order placement and integrating responses from the other two microservices.
 - **Key Operation**:
   - **Place Order**:
@@ -29,6 +14,22 @@ This project implements a microservices-based architecture using Spring Boot. It
     - Calls the **Account Service** (using `RestTemplate`) to reserve stocks.
     - Updates order details with the account’s current stock price and remaining quantity.
     - Calls the **Fee Service** (again using `RestTemplate`) to calculate the transaction fee based on the updated price.
+
+---
+
+### 2. Account Transactions Service (Eureka Service 2)
+- **Purpose**: Manages account data and stock quantities.
+- **Key Operations**:
+  - **Create Account**: Allows the creation of a new account with an initial stock quantity and price.
+  - **Reserve Stock**: Deducts (reserves) the requested quantity from the available stock when an order is placed.
+
+---
+
+### 3. Fee Service (Eureka Service 3)
+- **Purpose**: Calculates transaction fees based on order details.
+- **Key Operation**:
+  - **Calculate Fee**: Computes a fee using a fixed percentage (e.g., 10%) from the order’s price and quantity.
+
 
 ---
 
